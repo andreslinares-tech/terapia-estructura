@@ -3,16 +3,17 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Terapia con Fer — Estructura por sesión (solo hechos)</title>
+<title>Terapia con Fer — 3 sesiones · Hechos · Resumen · Historia</title>
 <script src="https://cdn.tailwindcss.com"></script>
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Space+Grotesk:wght@500;600;700&family=Source+Serif+4:ital,opsz,wght@1,8..60,400;1,8..60,500&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Space+Grotesk:wght@500;600;700&family=Source+Serif+4:ital,opsz,wght@0,8..60,400;1,8..60,400;1,8..60,500&display=swap" rel="stylesheet">
 <style>
   :root{ --bg:#0a0a0c; --card:#141417; --line:#26262c; }
   *{ scroll-behavior:smooth; }
   body{ background:var(--bg); color:#e7e7ea; font-family:'Inter',sans-serif; }
   h1,h2,h3,h4,.grotesk{ font-family:'Space Grotesk',sans-serif; }
-  .serif{ font-family:'Source Serif 4',serif; font-style:italic; }
+  .serif{ font-family:'Source Serif 4',serif; }
+  .serif-i{ font-family:'Source Serif 4',serif; font-style:italic; }
   .grain{ position:fixed; inset:0; pointer-events:none; opacity:.035; z-index:50;
     background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E"); }
   .card{ background:var(--card); border:1px solid var(--line); border-radius:18px; }
@@ -31,40 +32,58 @@
   ul.facts li{ position:relative; padding-left:16px; margin-bottom:7px; color:#b9b9c2; font-size:13.5px; line-height:1.55; }
   ul.facts li:before{ content:"·"; position:absolute; left:2px; color:#55555f; font-weight:700; }
   ul.q li{ list-style:none; margin-bottom:10px; }
-  .b{ color:#e7e7ea; font-weight:600; }
-  @media print{ section{ break-inside:avoid; } .card{ break-inside:avoid; } }
+  /* toggle */
+  .seg{ background:#121216; border:1px solid var(--line); border-radius:999px; padding:4px; gap:4px; }
+  .seg button{ font-family:'Space Grotesk',sans-serif; font-weight:600; font-size:14px; padding:8px 20px; border-radius:999px; color:#9a9aa5; transition:all .18s; white-space:nowrap; }
+  .seg button:hover{ color:#e7e7ea; }
+  .seg button.active{ color:#0a0a0c; background:#e7e7ea; }
+  .view{ display:none; }
+  .view.active{ display:block; animation:fade .25s ease; }
+  @keyframes fade{ from{opacity:0; transform:translateY(6px)} to{opacity:1; transform:none} }
+  .story p{ color:#cfcfd6; font-size:16px; line-height:1.75; margin-bottom:16px; }
+  .story p:first-of-type::first-letter{ font-family:'Space Grotesk',sans-serif; font-size:42px; font-weight:700; float:left; line-height:.9; padding:4px 10px 0 0; }
+  .story b{ color:#fff; font-weight:600; }
+  .drop-r::first-letter{ color:#e06666; } .drop-a::first-letter{ color:#f6b26b; } .drop-g::first-letter{ color:#93c47d; }
 </style>
 </head>
 <body>
 <div class="grain"></div>
 
 <!-- HERO -->
-<header class="max-w-5xl mx-auto px-6 pt-14 pb-8">
+<header class="max-w-4xl mx-auto px-6 pt-12 pb-6">
   <div class="flex items-center gap-2 mb-5 flex-wrap">
     <span class="pill" style="background:#1d1d22;color:#9a9aa5">TERAPIA · FER MANZANO</span>
     <span class="pill" style="background:#1d1d22;color:#9a9aa5">3 sesiones · abr–may 2026</span>
-    <span class="pill" style="background:#1d1d22;color:#9a9aa5">Solo hechos · sin interpretación</span>
   </div>
-  <h1 class="text-4xl md:text-5xl font-extrabold leading-tight">Estructura por sesión</h1>
-  <p class="serif text-xl text-neutral-400 mt-4 max-w-2xl">
-    Lo que se dijo en cada sesión, ordenado. Las comillas son frases textuales de Fer — el resto es lo que reportó Andrés. <span class="not-italic">Nada agregado.</span>
-  </p>
+  <h1 class="text-4xl md:text-5xl font-extrabold leading-tight">
+    Del <span style="color:#e06666">colapso</span> al <span style="color:#f6b26b">sistema</span> al <span style="color:#93c47d">anclaje</span>
+  </h1>
+  <p class="serif-i text-xl text-neutral-400 mt-4 max-w-2xl">Tres sesiones, tres maneras de leerlas. Elegí el ángulo.</p>
 </header>
 
-<main class="max-w-5xl mx-auto px-6 py-10 space-y-16">
-
-  <!-- ===================== SESIÓN 1 ===================== -->
-  <section>
-    <div class="flex items-start gap-4 mb-6">
-      <span class="tl-dot grad-r mt-2"></span>
-      <div class="flex items-center gap-3 flex-wrap">
-        <h2 class="text-2xl font-bold">Sesión 1 — 28 abril</h2>
-        <span class="pill" style="background:#3b1d1d;color:#e06666">74 min</span>
-      </div>
+<!-- TOGGLE -->
+<div class="sticky top-0 z-40 backdrop-blur bg-[#0a0a0c]/85 border-y border-[#26262c] py-3 mb-4">
+  <div class="max-w-4xl mx-auto px-6 flex items-center gap-3">
+    <div class="seg flex overflow-x-auto">
+      <button data-view="hechos" class="active">Hechos</button>
+      <button data-view="resumen">Resumen</button>
+      <button data-view="historia">Historia</button>
     </div>
+    <span id="hint" class="text-xs text-neutral-500 hidden md:block serif-i"></span>
+  </div>
+</div>
 
+<main class="max-w-4xl mx-auto px-6 pb-16">
+
+<!-- ============================================================= -->
+<!-- ====================  VISTA: HECHOS  ========================= -->
+<!-- ============================================================= -->
+<div id="view-hechos" class="view active space-y-14">
+
+  <!-- SESIÓN 1 -->
+  <section>
+    <div class="flex items-center gap-3 mb-5 flex-wrap"><span class="tl-dot grad-r"></span><h2 class="text-2xl font-bold">Sesión 1 — 28 abril</h2><span class="pill" style="background:#3b1d1d;color:#e06666">74 min</span></div>
     <div class="card glow-red p-7 space-y-5">
-
       <div>
         <p class="lbl mb-2">Lo que reportó Andrés</p>
         <ul class="facts">
@@ -77,280 +96,238 @@
           <li>Recién ese día le delegó a Bastián, porque se sentía mal.</li>
           <li>Tiene a Bastián (~4 horas). Está Fabián (primo), que ejecuta tareas de Pato; arrancó sin saber nada.</li>
           <li>Pato encontró una forma de delegar lo suyo y le pasó la idea.</li>
-          <li>Hace 4 años que no viaja.</li>
-          <li>El mes pasado ~1900 USD de lo inmobiliario; este mes se cerró uno solo.</li>
+          <li>Hace 4 años que no viaja. El mes pasado ~1900 USD de lo inmobiliario; este mes se cerró uno solo.</li>
         </ul>
       </div>
-
       <div class="grid md:grid-cols-3 gap-4">
-        <div class="inner p-5">
-          <p class="lbl mb-2">Ejercicio "¿qué querés?"</p>
-          <ul class="facts">
-            <li>Mano derecha resolutiva, que sepa lo que él hace.</li>
-            <li>Que pueda irse de viaje y no "le hayan prendido fuego todo".</li>
-            <li>Buen ambiente laboral (incluye clientes).</li>
-            <li>Potenciar ingresos sin más tiempo.</li>
-            <li>Que aporte visión, no solo ejecute.</li>
-            <li>Que aprenda rápido, que se adapte.</li>
-            <li>Permanencia ~2 años.</li>
-          </ul>
-        </div>
-        <div class="inner p-5">
-          <p class="lbl mb-2">Ejercicio "¿qué necesitás?"</p>
-          <ul class="facts">
-            <li>Tiempo y dinero.</li>
-            <li>Tiempo: liberar 40% en 3 meses para otra unidad; Oli; correr, nadar, gimnasio, cine, vacaciones; amigos y familia.</li>
-            <li>Dinero: tranquilidad, libertad, viajar/comprar, experiencias.</li>
-          </ul>
-        </div>
-        <div class="inner p-5">
-          <p class="lbl mb-2">Ejercicio "¿qué NO querés?"</p>
-          <ul class="facts">
-            <li>Alguien que esté dos meses y se vaya.</li>
-            <li>Cambiar tiempo por dinero.</li>
-            <li>Clientes ratas.</li>
-            <li>Perderse cosas con Oli; anda a las corridas atrás del laburo.</li>
-          </ul>
-        </div>
+        <div class="inner p-5"><p class="lbl mb-2">"¿Qué querés?"</p><ul class="facts"><li>Mano derecha resolutiva, que sepa lo que él hace.</li><li>Que pueda irse de viaje sin que "le prendan fuego todo".</li><li>Buen ambiente laboral (incluye clientes).</li><li>Potenciar ingresos sin más tiempo.</li><li>Que aporte visión, no solo ejecute.</li><li>Permanencia ~2 años.</li></ul></div>
+        <div class="inner p-5"><p class="lbl mb-2">"¿Qué necesitás?"</p><ul class="facts"><li>Tiempo y dinero.</li><li>Tiempo: liberar 40% en 3 meses para otra unidad; Oli; correr, nadar, gimnasio, cine, vacaciones; amigos.</li><li>Dinero: tranquilidad, libertad, viajar/comprar, experiencias.</li></ul></div>
+        <div class="inner p-5"><p class="lbl mb-2">"¿Qué NO querés?"</p><ul class="facts"><li>Alguien que esté dos meses y se vaya.</li><li>Cambiar tiempo por dinero.</li><li>Clientes ratas.</li><li>Perderse cosas con Oli; anda a las corridas atrás del laburo.</li></ul></div>
       </div>
-
       <div class="inner p-5">
         <p class="lbl mb-3">Frases de Fer (textuales)</p>
-        <ul class="q text-[13.5px] text-neutral-300 leading-relaxed serif">
-          <li class="quote" style="border-color:#e06666">"Acá lo que pasa es que todo se está poniendo en esa persona, que todavía es imaginaria."</li>
+        <ul class="q text-[13.5px] text-neutral-300 leading-relaxed serif-i">
+          <li class="quote" style="border-color:#e06666">"Todo se está poniendo en esa persona, que todavía es imaginaria."</li>
           <li class="quote" style="border-color:#e06666">"Un mini Andrés te roba el laburo, los clientes y se va."</li>
           <li class="quote" style="border-color:#e06666">"No es momento de meter a otro, es momento de usar el recurso que ya existe."</li>
           <li class="quote" style="border-color:#e06666">"Se quedó sin batería, cargalo, boludo, no compres otro."</li>
-          <li class="quote" style="border-color:#e06666">"En búsqueda de eso idílico, que es una idea, perdemos la materialidad."</li>
           <li class="quote" style="border-color:#e06666">"¿Qué preferís? ¿Seis meses de un poco de aire y que se vaya? ¿O nada de aire?"</li>
-          <li class="quote" style="border-color:#e06666">"Si sos bueno formando, te va a pasar [que se vayan]; si sos malo formando, no te van a satisfacer tu necesidad."</li>
+          <li class="quote" style="border-color:#e06666">"Si sos bueno formando, te va a pasar [que se vayan]."</li>
           <li class="quote" style="border-color:#e06666">"Acá hay que hacerlo racional, no emocional."</li>
           <li class="quote" style="border-color:#e06666">"Sin descanso no hay rendimiento, porque hay colapso."</li>
           <li class="quote" style="border-color:#e06666">"La prioridad es descomprimir."</li>
-          <li class="quote" style="border-color:#e06666">"Vos no sos un cirujano con el corazón abierto y acaba de aparecer un trasplante… puede esperar."</li>
-          <li class="quote" style="border-color:#e06666">"Personas como nosotros tienen que tener vacaciones dos o tres veces por año."</li>
+          <li class="quote" style="border-color:#e06666">"Vos no sos un cirujano con el corazón abierto… puede esperar."</li>
         </ul>
       </div>
-
       <div class="grid md:grid-cols-2 gap-4">
-        <div class="inner p-5">
-          <p class="lbl mb-2">Frase que Andrés trajo (de Pato)</p>
-          <p class="serif text-neutral-300 text-sm">"No estamos hechos para hacer, estamos hechos para ver que las cosas se hagan."</p>
-          <p class="text-sm text-neutral-400 mt-2">Andrés: "Tengo que armar la fábrica que forma gente."</p>
-        </div>
-        <div class="inner p-5">
-          <p class="lbl mb-2">Tareas / decisiones de la sesión</p>
-          <ul class="facts">
-            <li>Buscar segundo teléfono o dual SIM (descomprimir).</li>
-            <li>Dormir 7 horas o más.</li>
-            <li>Lista de 3-5 tareas para delegar este mes.</li>
-            <li>Descansar día y medio o dos días corridos.</li>
-            <li>Buscar colegio de doble escolaridad para Oli.</li>
-            <li>Sesiones cada 15 días, martes 7:15 (12 y 26 may).</li>
-            <li>Vacaciones 2-3 veces al año.</li>
-            <li>Dato: la sesión cuesta 40 dólares.</li>
-          </ul>
-        </div>
+        <div class="inner p-5"><p class="lbl mb-2">Frase que Andrés trajo (de Pato)</p><p class="serif-i text-neutral-300 text-sm">"No estamos hechos para hacer, estamos hechos para ver que las cosas se hagan."</p><p class="text-sm text-neutral-400 mt-2">Andrés: "Tengo que armar la fábrica que forma gente."</p></div>
+        <div class="inner p-5"><p class="lbl mb-2">Tareas / decisiones</p><ul class="facts"><li>Buscar segundo teléfono o dual SIM.</li><li>Dormir 7 horas o más.</li><li>Lista de 3-5 tareas para delegar este mes.</li><li>Descansar día y medio o dos días corridos.</li><li>Colegio de doble escolaridad para Oli.</li><li>Sesiones cada 15 días, martes 7:15.</li><li>Vacaciones 2-3 veces al año.</li></ul></div>
       </div>
-
     </div>
   </section>
 
-  <!-- ===================== SESIÓN 2 ===================== -->
+  <!-- SESIÓN 2 -->
   <section>
-    <div class="flex items-start gap-4 mb-6">
-      <span class="tl-dot grad-a mt-2"></span>
-      <div class="flex items-center gap-3 flex-wrap">
-        <h2 class="text-2xl font-bold">Sesión 2 — 12 mayo</h2>
-        <span class="pill" style="background:#3b2f1d;color:#f6b26b">67 min</span>
-      </div>
-    </div>
-
+    <div class="flex items-center gap-3 mb-5 flex-wrap"><span class="tl-dot grad-a"></span><h2 class="text-2xl font-bold">Sesión 2 — 12 mayo</h2><span class="pill" style="background:#3b2f1d;color:#f6b26b">67 min</span></div>
     <div class="card glow-amber p-7 space-y-5">
-
       <div>
         <p class="lbl mb-2">Lo que reportó Andrés</p>
         <ul class="facts">
-          <li>Semana mejor. Está durmiendo mucho y más lúcido.</li>
-          <li>Laburó hasta el sábado a la tarde; el domingo fue al ecoparque, descansó.</li>
+          <li>Semana mejor. Está durmiendo mucho y más lúcido. El domingo fue al ecoparque, descansó.</li>
           <li>Pagó un montón de tarjetas (bolu-compras de la mudanza); ya tiene la plata para saldar.</li>
-          <li>Cerró otro mentoring (4 clases, ~400 USD). Cris vendió una más. Recurrencia con Pato.</li>
-          <li>Flor (programadora, novia de un amigo) le está dando una mano.</li>
+          <li>Cerró otro mentoring (~400 USD). Cris vendió una más. Recurrencia con Pato.</li>
+          <li>Flor (programadora) le está dando una mano.</li>
           <li>Se armó un bot al que le tira el proceso comercial y le arma proceso, bot, automatizaciones, estructura y plantillas. Se armó 5 bots rápido.</li>
           <li>Cada cliente arma la misma estructura; lo puede instalar cualquiera.</li>
-          <li>Arma el inmobiliario con base; después el de Pato (clínicas).</li>
           <li>Se fue un cliente grande con Pato; no le movió la aguja.</li>
           <li>Compró horno eléctrico (370) y caloventor (380). El mes que viene termina el gasto grueso.</li>
-          <li>Venía de 1000/mes ahorrado; ahora 1200.</li>
-          <li>Deshabilitó las notificaciones del teléfono y le bajó la ansiedad.</li>
+          <li>Venía de 1000/mes ahorrado; ahora 1200. Deshabilitó las notificaciones y le bajó la ansiedad.</li>
         </ul>
       </div>
-
       <div class="inner p-5">
         <p class="lbl mb-2">Temas tratados</p>
         <ul class="facts">
           <li>Diversificación: el proceso es el mismo más allá del nicho. "Yo estandaricé un proceso."</li>
-          <li>Meta financiera: ahorrar mínimo 1000/mes, colchón de 3000 en 2-3 meses, recién ahí invertir.</li>
-          <li>Bases con mantenimiento (100-200 USD/mes por cliente) para pagar sueldos y que le quede a él.</li>
+          <li>Meta: ahorrar mínimo 1000/mes, colchón de 3000 en 2-3 meses, recién ahí invertir.</li>
+          <li>Bases con mantenimiento (100-200 USD/mes por cliente).</li>
           <li>Gasto vs. inversión (tarjeta, horno, teléfono).</li>
-          <li>Obra social: tiene OSECAC (gratis por monotributo); averiguó el Hospital Italiano (~200 lucas). Fer paga 222, plan más alto.</li>
-          <li>Teléfono dual SIM / dos chips (lo que tiene Cris).</li>
-          <li>Identidad de "proyector": diseñado para crear cosas estructurales; lo monótono lo aburre pero lo delega.</li>
-          <li>Oli: Vicky va a arrancar horario central; probablemente doble escolaridad.</li>
+          <li>Obra social: OSECAC (gratis por monotributo) vs. Hospital Italiano (~200 lucas).</li>
+          <li>Teléfono dual SIM / dos chips.</li>
+          <li>Identidad de "proyector".</li>
+          <li>Oli: probablemente doble escolaridad.</li>
         </ul>
       </div>
-
       <div class="inner p-5">
         <p class="lbl mb-3">Frases de Fer (textuales)</p>
-        <ul class="q text-[13.5px] text-neutral-300 leading-relaxed serif">
-          <li class="quote" style="border-color:#f6b26b">"No le tengo miedo al colapso, me colapso." → "Eso puede ser la gran destraba."</li>
-          <li class="quote" style="border-color:#f6b26b">"El colapso también viene de la no decisión, y la no decisión es no acción, o muchas acciones sin llegar a ningún lado."</li>
-          <li class="quote" style="border-color:#f6b26b">"El dinero nunca sobra. Lo que sobra es desecho." / "Cuando digo que el dinero me sobra, el dinero se me caga de risa, tipo Pito Catalán, y se va."</li>
+        <ul class="q text-[13.5px] text-neutral-300 leading-relaxed serif-i">
+          <li class="quote" style="border-color:#f6b26b">"El colapso también viene de la no decisión… muchas acciones sin llegar a ningún lado."</li>
+          <li class="quote" style="border-color:#f6b26b">"El dinero nunca sobra. Lo que sobra es desecho."</li>
           <li class="quote" style="border-color:#f6b26b">"¿Viste la diferencia entre aprender y aprehender? Cuando lo aprehendés, lo hacés tuyo."</li>
           <li class="quote" style="border-color:#f6b26b">"Una cosa es gasto y otra es inversión."</li>
-          <li class="quote" style="border-color:#f6b26b">"¿Por qué no salir mañana y comprar un teléfono en 12 cuotas? ¿Por qué hay que esperar?"</li>
-          <li class="quote" style="border-color:#f6b26b">"No lo juzgues. El que te cuestiona, mandalo a la mierda. El único que tiene que estar conforme con la respuesta sos vos."</li>
-          <li class="quote" style="border-color:#f6b26b">"No hay una respuesta correcta y una incorrecta."</li>
-          <li class="quote" style="border-color:#f6b26b">"No es qué decidís, sino el hecho de decidir. Cuando decidiste que ibas a hacer esto, empezó a correr el agua."</li>
-          <li class="quote" style="border-color:#f6b26b">"El problema no es que aparezca otra cosa, el problema es cuando no resolvemos cosas viejas."</li>
-          <li class="quote" style="border-color:#f6b26b">"La clave está en tomar decisiones, no importa cuál, y no juzgar la decisión que tomamos. El tema es tomarla para poder hacer."</li>
-          <li class="quote" style="border-color:#f6b26b">"Se empezó a pensar en capitalizar en vez de tapar agujeros."</li>
+          <li class="quote" style="border-color:#f6b26b">"No lo juzgues. El único que tiene que estar conforme con la respuesta sos vos."</li>
+          <li class="quote" style="border-color:#f6b26b">"No es qué decidís, sino el hecho de decidir. Cuando decidiste, empezó a correr el agua."</li>
+          <li class="quote" style="border-color:#f6b26b">"El problema es cuando no resolvemos cosas viejas."</li>
+          <li class="quote" style="border-color:#f6b26b">"La clave está en tomar decisiones, no importa cuál, y no juzgar la decisión. El tema es tomarla para poder hacer."</li>
         </ul>
       </div>
-
       <div class="grid md:grid-cols-2 gap-4">
-        <div class="inner p-5">
-          <p class="lbl mb-2">Frases que Andrés trajo</p>
-          <ul class="facts">
-            <li>"El sistema mata talento."</li>
-            <li>"Prefiero el 1% de 100 hombres que el 100% de mi tiempo." (fordismo)</li>
-            <li>"Hoy en dos semanas puedo poner a alguien a hacer tareas sin que tenga conocimiento de la plataforma."</li>
-            <li>"Soy un proyector."</li>
-          </ul>
-        </div>
-        <div class="inner p-5">
-          <p class="lbl mb-2">Decisiones / pendientes</p>
-          <ul class="facts">
-            <li>Negocio: huevos en canastas distintas, pero con base.</li>
-            <li>Obra social: OSECAC ahora → Italiano en un par de meses, por tranquilidad.</li>
-            <li>Finanzas: colchón de 3000 USD (mín. 1000/mes) antes de invertir.</li>
-            <li>Oli: doble escolaridad.</li>
-            <li>Pendiente: resolver obra social (mandar correo), comprar cortinas, teléfono nuevo/dual SIM.</li>
-          </ul>
-        </div>
+        <div class="inner p-5"><p class="lbl mb-2">Frases que Andrés trajo</p><ul class="facts"><li>"El sistema mata talento."</li><li>"Prefiero el 1% de 100 hombres que el 100% de mi tiempo."</li><li>"En dos semanas puedo poner a alguien a hacer tareas."</li><li>"Soy un proyector."</li></ul></div>
+        <div class="inner p-5"><p class="lbl mb-2">Decisiones / pendientes</p><ul class="facts"><li>Huevos en canastas distintas, pero con base.</li><li>OSECAC ahora → Italiano en un par de meses.</li><li>Colchón de 3000 USD antes de invertir.</li><li>Oli: doble escolaridad.</li><li>Pendiente: obra social, cortinas, teléfono.</li></ul></div>
       </div>
-
     </div>
   </section>
 
-  <!-- ===================== SESIÓN 3 ===================== -->
+  <!-- SESIÓN 3 -->
   <section>
-    <div class="flex items-start gap-4 mb-6">
-      <span class="tl-dot grad-g mt-2"></span>
-      <div class="flex items-center gap-3 flex-wrap">
-        <h2 class="text-2xl font-bold">Sesión 3 — 26 mayo</h2>
-        <span class="pill" style="background:#1d3b27;color:#93c47d">72 min</span>
-      </div>
-    </div>
-
+    <div class="flex items-center gap-3 mb-5 flex-wrap"><span class="tl-dot grad-g"></span><h2 class="text-2xl font-bold">Sesión 3 — 26 mayo</h2><span class="pill" style="background:#1d3b27;color:#93c47d">72 min</span></div>
     <div class="card glow-green p-7 space-y-5">
-
       <div>
         <p class="lbl mb-2">Lo que reportó Andrés</p>
         <ul class="facts">
-          <li>La chica que se veía cortó; ella se quería enfocar en sí misma. No lo tomó como duelo ("aprendizaje"). Dejó de verse con otras para estar con ella.</li>
-          <li>"Dejamos de vibrar en la misma frecuencia cuando me agarró el coso y empecé a delegar todo." Ella también se enfermó al final; la veía en una espiral descendente. Ella quería hacer sus proyectos.</li>
-          <li>Muy buenas semanas: armó todo para delegar. Lo inmobiliario quedó delegado (se instala, se arma, ejecuta).</li>
-          <li>Agarra proyectos y los reparte: uno lo ayuda con uno, Flor con otro.</li>
-          <li>Cerró varios mentorings; la gente termina uno y hace otro.</li>
-          <li>Arrancó con ingeniería. Con Pato vieron lo mismo: ingeniería nunca se para. Se junta con un ex cliente (empresa de El Salvador) a revender; Pato con un chico de paneles solares.</li>
-          <li>Ordenó finanzas: ve en tiempo real ingresos, egresos, quién le debe/pagó. Cobra por Inflect, Olympus, AL Consulting.</li>
-          <li>Lo que más cae ahora es de lo suyo.</li>
-          <li>3 colaboradores (Bastián, Flor, Monse) + un cuarto (uno de Bahía).</li>
-          <li>30.000 pesos en efectivo en la billetera.</li>
-          <li>Compró alfombrita que le calienta los pies y un batidor de café.</li>
-          <li>Orden en la cocina y con el nutri (Sofi): lista de comidas, compra de la semana, comida para 3 días.</li>
+          <li>La chica que se veía cortó; quería enfocarse en sí misma. No lo tomó como duelo ("aprendizaje").</li>
+          <li>"Dejamos de vibrar en la misma frecuencia cuando me agarró el coso y empecé a delegar todo."</li>
+          <li>Muy buenas semanas: armó todo para delegar. Lo inmobiliario quedó delegado.</li>
+          <li>Agarra proyectos y los reparte. Cerró varios mentorings.</li>
+          <li>Arrancó con ingeniería. Se junta con un ex cliente (El Salvador); Pato con un chico de paneles solares.</li>
+          <li>Ordenó finanzas: ve en tiempo real ingresos, egresos, quién le debe/pagó.</li>
+          <li>3 colaboradores (Bastián, Flor, Monse) + un cuarto (de Bahía).</li>
+          <li>30.000 pesos en efectivo. Compró alfombrita y batidor de café. Orden en la cocina y con el nutri (Sofi).</li>
           <li>A la niñera le pagan 700 lucas, lo mismo que costaría el colegio.</li>
         </ul>
       </div>
-
       <div class="inner p-5">
         <p class="lbl mb-2">Temas tratados</p>
         <ul class="facts">
-          <li>"Estoy volando": va todo muy rápido, todo muy mental/virtual, no físico, "ni con gente".</li>
-          <li>Nueva unidad (ingeniería/paneles/energía): no es físico, es armarle el CRM/sistema como a las inmobiliarias.</li>
-          <li>Falta la pata física/presencial: vida social, salir, vecinos, gimnasio del edificio en horario con gente, running, "vinito y amigos".</li>
+          <li>"Estoy volando": va todo muy rápido, todo muy mental/virtual, no físico.</li>
+          <li>Nueva unidad (ingeniería/paneles): armarle el CRM/sistema como a las inmobiliarias.</li>
+          <li>Falta la pata física/presencial: salir, vecinos, gimnasio del edificio, running, "vinito y amigos".</li>
           <li>Efectivo en la billetera / bajar las cosas al plano físico.</li>
-          <li>IA: "de acá a un año soy pollo"; podés tener un re negocio y mañana no tener nada.</li>
-          <li>Costumbre al malestar (años, sobre todo antes de Vicky): cortarla, invertir en bienestar cotidiano.</li>
-          <li>Ahorro por miedo vs. por seguridad.</li>
-          <li>El número de ahorro (3000) es arbitrario y modificable.</li>
-          <li>Pricing: subir el ticket 10-15%.</li>
-          <li>Gasto administrativo de tarjeta: ver si las cuotas tienen sentido (va a averiguar al banco).</li>
-          <li>Paradigma de ingreso: mirar el recibo el día 30, no día a día.</li>
-          <li>Oli: doble escolaridad cerrada (arranca después de las vacaciones).</li>
+          <li>IA: "de acá a un año soy pollo".</li>
+          <li>Costumbre al malestar: cortarla, invertir en bienestar cotidiano.</li>
+          <li>Ahorro por miedo vs. por seguridad. El 3000 es arbitrario.</li>
+          <li>Pricing: subir el ticket 10-15%. Recibo de sueldo el día 30.</li>
+          <li>Oli: doble escolaridad cerrada.</li>
         </ul>
       </div>
-
       <div class="inner p-5">
         <p class="lbl mb-3">Frases de Fer (textuales)</p>
-        <ul class="q text-[13.5px] text-neutral-300 leading-relaxed serif">
+        <ul class="q text-[13.5px] text-neutral-300 leading-relaxed serif-i">
           <li class="quote" style="border-color:#93c47d">"A tu vida le está faltando la pata física, la pata tangible."</li>
-          <li class="quote" style="border-color:#93c47d">"Hay una vorágine en lo virtual, en lo intangible, que pasa muy rápido, y lo físico te va a dar un anclaje."</li>
           <li class="quote" style="border-color:#93c47d">"Hoy necesitás un ancla, una raíz, un 'pará', porque eso va a calmar tu mente para tener la perspectiva."</li>
-          <li class="quote" style="border-color:#93c47d">"Si vas a usar el gimnasio del edificio, ver en qué horarios hay gente, para ir donde hay gente. La idea es vincularse."</li>
-          <li class="quote" style="border-color:#93c47d">"¿Cuántos billetes tenés en la billetera?… Algo en efectivo tenés que tener."</li>
           <li class="quote" style="border-color:#93c47d">"La perspectiva del otro es lo que te va a nutrir, porque es lo nuevo, lo desconocido."</li>
           <li class="quote" style="border-color:#93c47d">"Hay una costumbre al malestar que hay que empezar a cortar."</li>
-          <li class="quote" style="border-color:#93c47d">"Es invertir en la comodidad, en el bienestar, en el detalle cotidiano." / "Esto es para mí."</li>
           <li class="quote" style="border-color:#93c47d">"Uno puede ahorrar porque tiene miedo, o puede ahorrar porque quiere seguridad. No es lo mismo."</li>
-          <li class="quote" style="border-color:#93c47d">"Tener un teléfono que reaccione facilita el desarrollo laboral, es una inversión… a Andrés le va a agradar más Andrés. Eleva tu estatus."</li>
-          <li class="quote" style="border-color:#93c47d">"Ese es un número que vos pusiste. Así como lo pusiste, lo podés cambiar… es un número arbitrario."</li>
-          <li class="quote" style="border-color:#93c47d">"¿Por el 10% la gente se va? ¿O se sigue quedando?" / "Una forma de diferenciarse es por valor de ticket."</li>
-          <li class="quote" style="border-color:#93c47d">"Ahora ya no estamos en relación de dependencia. Eso era para Monsanto, no para ahora."</li>
-          <li class="quote" style="border-color:#93c47d">"En vez de pensar que tu recibo de sueldo lo mirás el 10, mirá tu recibo de sueldo el 30. El día 30 es tu verdadero recibo de sueldo."</li>
-          <li class="quote" style="border-color:#93c47d">"Cuando uno empieza a crecer, empieza a tener plata en la calle: gente que te debe que todavía no te pagó."</li>
+          <li class="quote" style="border-color:#93c47d">"A Andrés le va a agradar más Andrés. Eleva tu estatus."</li>
+          <li class="quote" style="border-color:#93c47d">"Ese es un número que vos pusiste. Así como lo pusiste, lo podés cambiar."</li>
+          <li class="quote" style="border-color:#93c47d">"Eso era para Monsanto, no para ahora."</li>
+          <li class="quote" style="border-color:#93c47d">"El día 30 es tu verdadero recibo de sueldo."</li>
         </ul>
       </div>
-
-      <div class="grid md:grid-cols-2 gap-4">
-        <div class="inner p-5">
-          <p class="lbl mb-2">Frases que Andrés reconoció</p>
-          <ul class="facts">
-            <li>"Me doy cuenta que [ahorro] es más por miedo, pero creo que tiene que ser más por seguridad."</li>
-            <li>"Hace rato me marcaba conocer gente presencial."</li>
-            <li>"Tengo el gimnasio acá y no voy."</li>
-          </ul>
-        </div>
-        <div class="inner p-5">
-          <p class="lbl mb-2">Decisiones / acciones</p>
-          <ul class="facts">
-            <li>Ir al gimnasio del edificio (en horario con gente) y/o grupo de running.</li>
-            <li>Sumar actividad social presencial (vecinos, "vinito y amigos").</li>
-            <li>Tener algo de efectivo en la billetera.</li>
-            <li>Averiguar en el banco el gasto administrativo de la tarjeta.</li>
-            <li>Subir el ticket 10-15% donde no esté ajustado.</li>
-            <li>Mirar las finanzas a mes cerrado (día 30).</li>
-            <li>Oli a doble escolaridad después de las vacaciones (cerrado).</li>
-          </ul>
-        </div>
-      </div>
-
-      <div class="inner p-5">
-        <p class="lbl mb-2">Dato de negocio (cierre)</p>
-        <ul class="facts">
-          <li>Con Pato están diseñando la app de Fer: app + 1 sesión/mes por 60-70 USD, con botón para agendar sesiones individuales extra.</li>
-          <li>Fer dijo que notó "tres pilares" en esta sesión y quiere ver si Fathom/IA tomó los mismos.</li>
-        </ul>
-      </div>
-
+      <div class="inner p-5"><p class="lbl mb-2">Dato de negocio (cierre)</p><ul class="facts"><li>Con Pato están diseñando la app de Fer: app + 1 sesión/mes por 60-70 USD, con botón para agendar sesiones extra.</li><li>Fer notó "tres pilares" en la sesión y quiere ver si la IA tomó los mismos.</li></ul></div>
     </div>
   </section>
+</div>
+
+<!-- ============================================================= -->
+<!-- ====================  VISTA: RESUMEN  ======================== -->
+<!-- ============================================================= -->
+<div id="view-resumen" class="view space-y-10">
+
+  <div class="card p-7">
+    <p class="lbl mb-3">El arco en una línea</p>
+    <p class="serif-i text-2xl text-neutral-200 leading-snug">De <span style="color:#e06666">colapsar</span> porque hacía todo, a <span style="color:#f6b26b">construir el sistema</span> que le dejó delegar, a darse cuenta de que ahora <span style="color:#93c47d">vuela demasiado en lo virtual</span> y le falta tocar el piso.</p>
+  </div>
+
+  <div class="grid md:grid-cols-3 gap-4">
+    <div class="card glow-red p-6"><div class="flex items-center gap-2 mb-2"><span class="tl-dot grad-r"></span><p class="font-bold">28 abr · Colapso</p></div><p class="text-sm text-neutral-400 leading-relaxed">El corazón se le aceleró de noche. Tenía todo armado para delegar y no delegaba. Diagnóstico de Fer: <b class="text-neutral-200">no descansás y no decidís</b>. La salida no es buscar a la persona ideal, es cargar la que ya está (Bastián) y armar la fábrica que forma gente.</p></div>
+    <div class="card glow-amber p-6"><div class="flex items-center gap-2 mb-2"><span class="tl-dot grad-a"></span><p class="font-bold">12 may · Sistema</p></div><p class="text-sm text-neutral-400 leading-relaxed">Durmió, descansó, y armó el agente que estandariza el proceso comercial: 5 bots rápido. <b class="text-neutral-200">"El sistema mata talento"</b> → ya puede delegar. Decidir (canastas con base) le sacó el miedo al colapso. El colapso viene de la no decisión.</p></div>
+    <div class="card glow-green p-6"><div class="flex items-center gap-2 mb-2"><span class="tl-dot grad-g"></span><p class="font-bold">26 may · Anclaje</p></div><p class="text-sm text-neutral-400 leading-relaxed">Inmobiliario 100% delegado, finanzas en tiempo real, nueva unidad (energía). Pero "estoy volando": todo virtual. Fer marca que <b class="text-neutral-200">le falta la pata física</b> — cuerpo, gente presencial, efectivo. El ancla no frena el vuelo, lo sostiene.</p></div>
+  </div>
+
+  <div class="card p-7">
+    <p class="lbl mb-4">Los 5 hilos que cruzan las tres sesiones</p>
+    <div class="space-y-4">
+      <div><p class="font-semibold text-neutral-100">1 · Decidir es el músculo central</p><p class="text-sm text-neutral-400 leading-relaxed">El colapso no viene del exceso de trabajo, viene de tener todo abierto. Decidir descomprime — aunque no sea lo óptimo. Y no juzgar la decisión después.</p></div>
+      <div><p class="font-semibold text-neutral-100">2 · El sistema reemplaza al talento</p><p class="text-sm text-neutral-400 leading-relaxed">El miedo a delegar era miedo a depender de que el otro fuera tan bueno como él. La respuesta no fue encontrar gente excepcional, fue construir el sistema que hace rendir a gente normal.</p></div>
+      <div><p class="font-semibold text-neutral-100">3 · Es proyector, no ejecutor</p><p class="text-sm text-neutral-400 leading-relaxed">Su trabajo real es diseñar y supervisar que las cosas se hagan, no hacerlas. Cuando se piensa así, delegar deja de doler.</p></div>
+      <div><p class="font-semibold text-neutral-100">4 · Volar necesita ancla</p><p class="text-sm text-neutral-400 leading-relaxed">El logro de mayo trae su propio riesgo: vive demasiado en lo mental y virtual. El antídoto es físico y presencial. No para frenar, para no disociarse.</p></div>
+      <div><p class="font-semibold text-neutral-100">5 · El dinero es emocional antes que matemático</p><p class="text-sm text-neutral-400 leading-relaxed">Ahorra por miedo, le cuesta gastar en sí mismo. El trabajo financiero de Fer es, en realidad, de autopercepción: gastar en su bienestar es decirse "valgo esto".</p></div>
+    </div>
+  </div>
+
+  <div class="card p-8 text-center">
+    <p class="serif-i text-2xl text-neutral-200 leading-snug max-w-2xl mx-auto">"El truco es decidir, no importa cuál, y no juzgar la decisión. El tema es tomarla para poder hacer."</p>
+    <p class="text-neutral-500 mt-3 text-sm">— Fer Manzano</p>
+  </div>
+</div>
+
+<!-- ============================================================= -->
+<!-- ====================  VISTA: HISTORIA  ======================= -->
+<!-- ============================================================= -->
+<div id="view-historia" class="view space-y-12">
+
+  <!-- Cap 1 -->
+  <article>
+    <div class="flex items-center gap-3 mb-4 flex-wrap"><span class="tl-dot grad-r"></span><p class="lbl">Capítulo uno · 28 abril</p></div>
+    <h2 class="text-2xl font-bold mb-5" style="color:#e06666">La noche que el cuerpo dijo basta</h2>
+    <div class="story drop-r card glow-red p-8">
+      <p>Andrés llegó a la sesión todavía con el susto encima. La noche anterior, en la oscuridad, el corazón se le había disparado a mil — la segunda vez en su vida, la primera había sido años atrás en Danone, recién mudado. Esta vez estaba Oli cerca. Tuvo que levantarse, abrir la ventana, salir a tomar aire, y recién después volvió a la cama. No era el corazón el problema: era el cuerpo poniéndole un freno a algo que la cabeza venía ignorando hacía meses.</p>
+      <p>Porque por fuera todo "funcionaba". Tenía a Cris vendiendo lo inmobiliario, a Pato con las clínicas, clientes que le llegaban todos los días. Hasta había construido las herramientas para delegar: una automatización que decidía por él qué soltar. Y sin embargo no soltaba nada. Recién ese día, sintiéndose mal, le había pasado por fin una tarea a Bastián. "¿Por qué tengo que llegar a este punto para delegar?", se preguntaba en voz alta.</p>
+      <p>Fer no fue por el susto, fue por el patrón. Lo nombró sin rodeos: <b>no descansás y no decidís</b>, y las dos cosas se alimentan. Le pidió un ejercicio — cerrá los ojos, ¿qué querés? — y Andrés describió a su mano derecha ideal: resolutiva, que aprenda rápido, que se quede dos años, que le potencie los ingresos sin meterle más horas. Una persona casi perfecta. Casi imaginaria. Y ahí Fer puso el dedo: <b>"todo se está poniendo en esa persona, que todavía no existe"</b>.</p>
+      <p>Le devolvió una imagen que se quedó dando vueltas toda la sesión. Vos tenés un iPad guardado que dejaste de usar porque se quedó sin batería — y en vez de enchufarlo, te compraste otro. <b>"Cargalo, boludo, no compres otro."</b> El iPad era Bastián. El recurso ya estaba; lo que faltaba era formarlo. Y detrás del miedo a formarlo aparecía otro más viejo: que la gente se vaya. Fer no lo negó, lo dio vuelta: si sos bueno formando, se van — esa es la prueba. ¿Qué preferís, seis meses de aire o nada de aire? Andrés no dudó: seis meses de aire. <b>"Tengo que armar la fábrica que forma gente"</b>, dijo, casi descubriéndolo.</p>
+      <p>Se fue con tareas concretas y chiquitas, las primeras grietas para descomprimir: un segundo teléfono para separar lo personal de lo laboral, dormir siete horas, una lista de cinco tareas para delegar, y un día y medio entero sin trabajar. "Vos no sos un cirujano con el corazón abierto", le dijo Fer. El mundo podía esperar.</p>
+    </div>
+  </article>
+
+  <!-- Cap 2 -->
+  <article>
+    <div class="flex items-center gap-3 mb-4 flex-wrap"><span class="tl-dot grad-a"></span><p class="lbl">Capítulo dos · 12 mayo</p></div>
+    <h2 class="text-2xl font-bold mb-5" style="color:#f6b26b">El sistema que destrabó todo</h2>
+    <div class="story drop-a card glow-amber p-8">
+      <p>Dos semanas después, el Andrés que apareció en pantalla era otro. Había dormido. Había cortado el sábado a la tarde y el domingo se fue al ecoparque sin culpa. Hablaba más lento, más lúcido. Pero lo grande no era el descanso: era lo que había construido con esa cabeza despejada.</p>
+      <p>Se había armado un agente — un bot al que le tiraba el proceso comercial de un cliente y le devolvía todo hecho: el bot, las automatizaciones, la estructura, las plantillas. En días se fabricó cinco. Y con eso cayó la ficha que destrabó el nudo de la sesión anterior: <b>"el sistema mata talento"</b>. Si el proceso estaba estandarizado, ya no dependía de encontrar a alguien tan bueno como él. Cualquiera, metido en el sistema, rendía. El miedo a delegar, que en el fondo era miedo a depender, se desinfló solo. Delegar pasó de imposible a obvio.</p>
+      <p>Empezó a pensar el negocio como canastas distintas — inmobiliario, clínicas, mentorings, farmacéutica — pero todas con la misma base, el mismo proceso. Y a ordenar la plata: armar un colchón de tres mil dólares, mil por mes, y recién después invertir. Fer escuchó y fue puliendo. Cuando Andrés dijo que le "sobraba" plata, lo frenó: <b>"el dinero nunca sobra; lo que sobra es desecho"</b>. Cuando dudaba si el horno o el teléfono eran un gasto, le marcó la diferencia entre gasto e inversión.</p>
+      <p>Pero el corazón de esa sesión fue otra cosa. Andrés había soltado, casi sin querer, una frase: "no le tengo miedo al colapso, me colapso". Fer la agarró al vuelo. <b>El colapso viene de la no decisión</b> — de estar con un pie en una canoa, una rodilla en otra, sin pisar firme en ninguna. En el momento en que él decidió repartir los huevos en canastas con base, se paró sobre tierra firme, y eso — no resolver el problema, sino decidir — fue lo que le sacó el miedo. Lo mismo con la obra social: OSECAC o el Italiano, no había respuesta correcta. <b>"No lo juzgues. El único que tiene que estar conforme con la respuesta sos vos."</b> El truco no era acertar. El truco era decidir.</p>
+    </div>
+  </article>
+
+  <!-- Cap 3 -->
+  <article>
+    <div class="flex items-center gap-3 mb-4 flex-wrap"><span class="tl-dot grad-g"></span><p class="lbl">Capítulo tres · 26 mayo</p></div>
+    <h2 class="text-2xl font-bold mb-5" style="color:#93c47d">Volando, y buscando el piso</h2>
+    <div class="story drop-g card glow-green p-8">
+      <p>La tercera sesión lo encontró arriba. Lo inmobiliario quedó cien por ciento delegado: se instala, se arma, ejecuta. Agarraba proyectos y los repartía entre cuatro colaboradores. Tenía las finanzas en tiempo real, veía caer plata de todos lados, y ya estaba mirando la próxima frontera — energía, paneles, ingeniería. Todo lo que tocaba se multiplicaba.</p>
+      <p>Hasta lo de la chica que veía, que había cortado, lo contó desde arriba: aprendizaje, no duelo. Se vio espejado en ella — los dos sobre-trabajando — y se dio cuenta de que cuando él empezó a delegar, dejaron de vibrar en la misma frecuencia. Era casi una metáfora de todo lo demás: algo en él se había movido de lugar.</p>
+      <p>Y mientras contaba todo esto, repetía una palabra sin notarla: <b>"estoy volando"</b>. Fer se quedó colgada de esa frase. ¿Volando bien, o volando sin pies en la tierra? La empujó hasta el fondo: tu vida es toda mental, virtual, abstracta — pantalla, sistemas, plata que ni ves —, y le falta la pata física. Lo tangible. Lo presencial. El insight fino no era frenar el vuelo: era anclarlo. <b>"Hoy necesitás un ancla, una raíz, un 'pará', porque eso va a calmar tu mente para tener perspectiva."</b> El gimnasio del edificio que no usaba, conocer a los vecinos, un grupo de running, billetes en la billetera, comida hecha en casa. Cosas que se tocan.</p>
+      <p>Por debajo apareció lo más viejo: la costumbre al malestar. Años de inestabilidad lo habían acostumbrado a un piso de incomodidad que ya ni registraba. Comprarse una alfombrita que le calienta los pies, un batidor de café, el horno — Fer lo reencuadró: no son boludeces, son la frase "esto es para mí". Y el ahorro, admitió Andrés, era más miedo que seguridad. Hasta el número mágico de los tres mil dólares, le mostró Fer, era arbitrario: lo puso él, lo puede cambiar él. Un teléfono que funcione no es un gasto, es una inversión que sube cuánto se gusta a sí mismo. "A Andrés le va a agradar más Andrés."</p>
+      <p>Cerraron con un cambio de paradigma sobre la plata: dejar de mirar la caja del día y mirar el cierre del mes. <b>"El día 30 es tu verdadero recibo de sueldo"</b> — porque mirar diario es mentalidad de relación de dependencia, de Danone, de Monsanto, y él ya no estaba ahí. Andrés volaba. Solo le faltaba, de a poco, volver a tocar el piso.</p>
+    </div>
+  </article>
+</div>
 
 </main>
 
-<footer class="max-w-5xl mx-auto px-6 py-10 border-t border-[#26262c] text-xs text-neutral-600">
-  Estructura por sesión · solo hechos dichos en sesión · Terapia Fer Manzano · abr–may 2026 · fuente: transcripción Fathom
+<footer class="max-w-4xl mx-auto px-6 py-10 border-t border-[#26262c] text-xs text-neutral-600">
+  Terapia Fer Manzano · abr–may 2026 · Hechos = solo lo dicho en sesión · Resumen e Historia = elaborados a partir de los hechos · fuente: transcripción Fathom
 </footer>
+
+<script>
+  const hints = {
+    hechos: "Solo lo dicho en sesión — sin interpretación.",
+    resumen: "El arco y los hilos, condensado.",
+    historia: "Los hechos transformados en relato."
+  };
+  const btns = document.querySelectorAll('.seg button');
+  const views = { hechos:'view-hechos', resumen:'view-resumen', historia:'view-historia' };
+  const hint = document.getElementById('hint');
+  function show(v){
+    btns.forEach(b => b.classList.toggle('active', b.dataset.view===v));
+    Object.entries(views).forEach(([k,id]) => document.getElementById(id).classList.toggle('active', k===v));
+    hint.textContent = hints[v];
+    window.scrollTo({top:0, behavior:'instant'});
+  }
+  btns.forEach(b => b.addEventListener('click', () => show(b.dataset.view)));
+  hint.textContent = hints.hechos;
+</script>
 </body>
 </html>
